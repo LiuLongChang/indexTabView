@@ -8,6 +8,13 @@
 
 #import "ViewController.h"
 
+
+#define kScreenBounds [UIScreen mainScreen].bounds
+#define kScreenWidth [UIScreen mainScreen].bounds.size.height
+#define kScreenHeight [UIScreen mainScreen].bounds.size.width
+#define pictureHeight 200
+
+
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
 
@@ -15,7 +22,13 @@
 
     NSArray * listGroupNameArray;
 
+    UITableView * tabView;
+
 }
+
+@property(nonatomic,strong)UIView* header;
+@property(nonatomic,strong)UIImageView* pictureImageView;
+
 
 @end
 
@@ -25,10 +38,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
+    self.navigationItem.title = @"索引+下拉放大图片";
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    [self createTabView];
+    [self getData];
+
+
+
+
+
+}
+
+-(void)getData{
+
+    //得到数据
+    NSBundle * bundle = [NSBundle mainBundle];
+    NSString * plistPathStr = [bundle pathForResource:@"team_dictionary" ofType:@"plist"];
+
+
+    dataDictionary = [[NSDictionary alloc] initWithContentsOfFile:plistPathStr];
+    NSLog(@"取出的plist文件字典: %@",dataDictionary);
+    listGroupNameArray = [[dataDictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    NSLog(@"排序后的数组：%@",listGroupNameArray);
+
+    [tabView reloadData];
+
+}
+
+-(void)createTabView{
 
     //创建UI界面
-    UITableView * tabView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];[self.view addSubview:tabView];tabView.delegate = self;tabView.dataSource = self;
+    tabView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];[self.view addSubview:tabView];tabView.delegate = self;tabView.dataSource = self;
 
     tabView.backgroundColor = [UIColor cyanColor];
     tabView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -46,17 +88,19 @@
     [self.view addConstraints:consArr];
 
 
-    //得到数据
-    NSBundle * bundle = [NSBundle mainBundle];
-    NSString * plistPathStr = [bundle pathForResource:@"team_dictionary" ofType:@"plist"];
+
+    self.header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, pictureHeight)];
+    _pictureImageView = [[UIImageView alloc] initWithFrame:_header.bounds];
+    _pictureImageView.image = [UIImage imageNamed:@"picture9.jpg"];
 
 
-    dataDictionary = [[NSDictionary alloc] initWithContentsOfFile:plistPathStr];
-    NSLog(@"取出的plist文件字典: %@",dataDictionary);
-    listGroupNameArray = [[dataDictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
-    NSLog(@"排序后的数组：%@",listGroupNameArray);
+    _pictureImageView.contentMode = UIViewContentModeScaleAspectFill;
+    _pictureImageView.clipsToBounds = YES;
+    [_header addSubview:_pictureImageView];
 
-    [tabView reloadData];
+    tabView.tableHeaderView = _header;
+    [self.view addSubview:tabView];
+
 
 }
 
@@ -107,6 +151,25 @@
     return listTitlesArray;
 }
 
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+
+
+    CGFloat offset_y = scrollView.contentOffset.y;
+
+    if (offset_y < 0) {
+
+        CGFloat totalOffset = pictureHeight - offset_y;
+        CGFloat scale = totalOffset / pictureHeight;
+        CGFloat width = kScreenWidth;
+        _pictureImageView.frame = CGRectMake(-(width * scale - width)/2, offset_y, width * scale, totalOffset);
+
+    }
+
+
+
+
+}
 
 
 - (void)didReceiveMemoryWarning {

@@ -14,6 +14,7 @@
 		941BAA5B1D6154B70023BE8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 941BAA5A1D6154B70023BE8D /* Assets.xcassets */; };
 		941BAA5E1D6154B70023BE8D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 941BAA5C1D6154B70023BE8D /* LaunchScreen.storyboard */; };
 		941BAA661D6154CB0023BE8D /* team_dictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 941BAA651D6154CB0023BE8D /* team_dictionary.plist */; };
+		941BAA681D6167F20023BE8D /* picture9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 941BAA671D6167F20023BE8D /* picture9.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		941BAA5D1D6154B70023BE8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		941BAA5F1D6154B70023BE8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		941BAA651D6154CB0023BE8D /* team_dictionary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = team_dictionary.plist; sourceTree = "<group>"; };
+		941BAA671D6167F20023BE8D /* picture9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = picture9.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				941BAA551D6154B70023BE8D /* ViewController.m */,
 				941BAA571D6154B70023BE8D /* Main.storyboard */,
 				941BAA5A1D6154B70023BE8D /* Assets.xcassets */,
+				941BAA671D6167F20023BE8D /* picture9.jpg */,
 				941BAA5C1D6154B70023BE8D /* LaunchScreen.storyboard */,
 				941BAA651D6154CB0023BE8D /* team_dictionary.plist */,
 				941BAA5F1D6154B70023BE8D /* Info.plist */,
@@ -143,6 +146,7 @@
 				941BAA5B1D6154B70023BE8D /* Assets.xcassets in Resources */,
 				941BAA591D6154B70023BE8D /* Main.storyboard in Resources */,
 				941BAA661D6154CB0023BE8D /* team_dictionary.plist in Resources */,
+				941BAA681D6167F20023BE8D /* picture9.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +310,7 @@
 				941BAA641D6154B70023BE8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
